@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-key="title">AI E VI - Người Bạn Trợ Lý Ảo Thông Minh</title>
+    <meta name="description" content="AI E VI - ứng dụng AI trò chuyện có khuôn mặt sinh động, biết biểu lộ cảm xúc. Phát triển bởi Lê Thành Công, Vĩnh Long.">
     <!-- Thư viện icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -11,6 +12,7 @@
             --primary: #8A2BE2; /* Tông màu tím công nghệ */
             --secondary: #00d2ff;
             --bg-color: #0b0c10;
+            --bg-alt: #12151b;
             --text-main: #ffffff;
             --text-muted: #c5c6c7;
             --card-bg: #1f2833;
@@ -23,11 +25,16 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        html { scroll-behavior: smooth; }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
         }
+
+        /* Tránh header cố định che tiêu đề khi bấm menu */
+        section { scroll-margin-top: 80px; }
 
         /* Header */
         header {
@@ -165,11 +172,38 @@
             100% { transform: translateY(0); }
         }
 
+        /* About Section (MỚI) */
+        .about {
+            padding: 80px 10%;
+            text-align: center;
+            background-color: var(--bg-alt);
+        }
+
+        .about h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .about p {
+            max-width: 820px;
+            margin: 0 auto 20px;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        .about p.highlight {
+            color: var(--text-main);
+            font-weight: 600;
+            border-left: 4px solid var(--secondary);
+            padding-left: 16px;
+            text-align: left;
+        }
+
         /* Features Section */
         .features {
             padding: 80px 10%;
             text-align: center;
-            background-color: #12151b;
+            background-color: var(--bg-color);
         }
 
         .features h2 {
@@ -211,6 +245,61 @@
             color: var(--text-muted);
         }
 
+        .feature-card p a {
+            color: var(--secondary);
+        }
+
+        /* Contact Section (MỚI) */
+        .contact {
+            padding: 80px 10%;
+            text-align: center;
+            background-color: var(--bg-alt);
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+        }
+
+        .contact-item {
+            background: var(--card-bg);
+            padding: 30px 20px;
+            border-radius: 15px;
+        }
+
+        .contact-item i {
+            font-size: 30px;
+            color: var(--secondary);
+            margin-bottom: 14px;
+        }
+
+        .contact-item .label {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .contact-item .value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 4px;
+        }
+
+        .contact-item a {
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+
         /* Footer */
         footer {
             text-align: center;
@@ -218,6 +307,23 @@
             background: #0b0c10;
             color: var(--text-muted);
             border-top: 1px solid #1f2833;
+        }
+
+        footer a {
+            color: var(--secondary);
+        }
+
+        footer p + p {
+            margin-top: 8px;
+        }
+
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--secondary);
+            outline-offset: 3px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-image img { animation: none; }
         }
 
         /* Responsive */
@@ -229,10 +335,12 @@
             }
             .hero-content, .hero-image {
                 max-width: 100%;
+                width: 100%;
             }
             .hero h1 { font-size: 2.5rem; }
             .hero-image { margin-top: 50px; }
             .nav-links { display: none; }
+            .about h2, .features h2, .contact h2 { font-size: 2rem; }
         }
     </style>
 </head>
@@ -242,8 +350,10 @@
         <div class="logo">AI E VI</div>
         <div class="nav-links">
             <a href="#home" data-key="navHome">Trang chủ</a>
+            <a href="#about" data-key="navAbout">Giới thiệu</a>
             <a href="#features" data-key="navFeatures">Tính năng</a>
             <a href="#contact" data-key="navContact">Liên hệ</a>
+            <a href="https://sites.google.com/view/ai-thanh-tien/trang-ch%E1%BB%A7" target="_blank" rel="noopener" data-key="navPrivacy">Quyền riêng tư</a>
             <div class="lang-toggle">
                 <button onclick="setLang('vi')" id="btn-vi" class="active">VI</button>
                 <button onclick="setLang('en')" id="btn-en">EN</button>
@@ -255,11 +365,18 @@
         <div class="hero-content">
             <h1 data-key="heroTitle">Trợ Lý AI Sống Động <br><span>Như Một Người Bạn</span></h1>
             <p data-key="heroDesc">Trải nghiệm giao tiếp AI trực quan với AI E VI. Không chỉ là văn bản, ứng dụng mang đến khuôn mặt sinh động, biểu cảm chân thực và khả năng xử lý đỉnh cao qua camera, giọng nói.</p>
-            <a href="https://play.google.com/store/apps/details?id=com.thanhcong.aithanhtien&hl=vi" target="_blank" class="btn btn-primary" data-key="heroBtn"><i class="fab fa-google-play"></i> Tải ngay trên Google Play</a>
+            <a href="https://play.google.com/store/apps/details?id=com.thanhcong.aithanhtien&hl=vi" target="_blank" rel="noopener" class="btn btn-primary" data-key="heroBtn"><i class="fab fa-google-play"></i> Tải ngay trên Google Play</a>
         </div>
         <div class="hero-image">
             <img src="1.jpg" alt="Giao diện ứng dụng AI E VI">
         </div>
+    </section>
+
+    <!-- MỚI: Phần giới thiệu -->
+    <section id="about" class="about">
+        <h2 data-key="aboutTitle">Giới Thiệu AI E VI</h2>
+        <p data-key="aboutP1">Bạn đang tìm kiếm một người bạn tâm giao hay một trợ thủ đắc lực có thể trò chuyện trực tiếp mọi lúc mọi nơi? AI E VI mang đến một trải nghiệm hoàn toàn mới: một AI thông minh không chỉ biết chat bằng văn bản mà còn có khuôn mặt sinh động, biết biểu lộ cảm xúc và trò chuyện hài hước như một người bạn thân thực sự!</p>
+        <p class="highlight" data-key="aboutP2">Không còn những dòng chữ khô khan, hãy bước vào kỷ nguyên giao tiếp AI trực quan với trải nghiệm như một cuộc gọi video đích thực.</p>
     </section>
 
     <section id="features" class="features">
@@ -281,7 +398,7 @@
                 <p data-key="f3Desc">Tích hợp Gemini AI giúp hiểu sâu ngữ cảnh hội thoại, phản hồi thông minh, hài hước và tự nhiên nhất.</p>
             </div>
             <div class="feature-card">
-                <i class="fas fa-id-face-viewfinder feature-icon"></i>
+                <i class="fas fa-camera feature-icon"></i>
                 <h3 data-key="f4Title">Nhận Diện Khuôn Mặt</h3>
                 <p data-key="f4Desc">AI ghi nhớ khuôn mặt và tên gọi qua camera để chủ động chào hỏi cá nhân hóa ngay khi bạn mở ứng dụng.</p>
             </div>
@@ -293,26 +410,61 @@
             <div class="feature-card">
                 <i class="fas fa-user-lock feature-icon"></i>
                 <h3 data-key="f6Title">Bảo Mật Quyền Riêng Tư</h3>
-                <p data-key="f6Desc">Nhật ký hội thoại được mã hóa bằng mật khẩu. Dữ liệu của bạn thuộc về bạn, đảm bảo an toàn tuyệt đối.</p>
+                <p data-key="f6Desc">Nhật ký hội thoại được mã hóa bằng mật khẩu. Xem chi tiết cách ứng dụng thu thập và xử lý dữ liệu trong <a href="https://sites.google.com/view/ai-thanh-tien/trang-ch%E1%BB%A7" target="_blank" rel="noopener">Chính sách quyền riêng tư</a>.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MỚI: Thông tin liên hệ (lấy từ trang Máy Phơi) -->
+    <section id="contact" class="contact">
+        <h2 data-key="contactTitle">Liên Hệ Nhà Phát Triển</h2>
+        <div class="contact-grid">
+            <div class="contact-item">
+                <i class="fas fa-user"></i>
+                <div class="label" data-key="cDev">Nhà phát triển</div>
+                <div class="value">Lê Thành Công</div>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div class="label" data-key="cAddr">Địa chỉ</div>
+                <div class="value" data-key="cAddrVal">Vĩnh Long, Việt Nam</div>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <div class="label" data-key="cPhone">Điện thoại</div>
+                <div class="value"><a href="tel:+84975012600">0975 012 600</a></div>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-shield-alt"></i>
+                <div class="label" data-key="cPrivacy">Chính sách quyền riêng tư</div>
+                <div class="value"><a href="https://sites.google.com/view/ai-thanh-tien/trang-ch%E1%BB%A7" target="_blank" rel="noopener" data-key="cPrivacyLink">Xem chính sách</a></div>
             </div>
         </div>
     </section>
 
     <footer>
-        <p data-key="footer">&copy; 2026 AI E VI. Thiết kế và phát triển bởi Đội ngũ kỹ thuật. Tất cả quyền được bảo lưu.</p>
+        <p data-key="footer">&copy; 2026 AI E VI. Phát triển bởi Lê Thành Công. Tất cả quyền được bảo lưu.</p>
+        <p><a href="https://sites.google.com/view/ai-thanh-tien/trang-ch%E1%BB%A7" target="_blank" rel="noopener" data-key="footerPrivacy">Chính sách quyền riêng tư</a></p>
     </footer>
 
     <!-- Script Chuyển Đổi Ngôn Ngữ -->
     <script>
+        const PRIVACY_URL = "https://sites.google.com/view/ai-thanh-tien/trang-ch%E1%BB%A7";
+
         const translations = {
             vi: {
                 title: "AI E VI - Người Bạn Trợ Lý Ảo Thông Minh",
                 navHome: "Trang chủ",
+                navAbout: "Giới thiệu",
                 navFeatures: "Tính năng",
                 navContact: "Liên hệ",
+                navPrivacy: "Quyền riêng tư",
                 heroTitle: "Trợ Lý AI Sống Động <br><span>Như Một Người Bạn</span>",
                 heroDesc: "Trải nghiệm giao tiếp AI trực quan với AI E VI. Không chỉ là văn bản, ứng dụng mang đến khuôn mặt sinh động, biểu cảm chân thực và khả năng xử lý đỉnh cao qua camera, giọng nói.",
                 heroBtn: "<i class='fab fa-google-play'></i> Tải ngay trên Google Play",
+                aboutTitle: "Giới Thiệu AI E VI",
+                aboutP1: "Bạn đang tìm kiếm một người bạn tâm giao hay một trợ thủ đắc lực có thể trò chuyện trực tiếp mọi lúc mọi nơi? AI E VI mang đến một trải nghiệm hoàn toàn mới: một AI thông minh không chỉ biết chat bằng văn bản mà còn có khuôn mặt sinh động, biết biểu lộ cảm xúc và trò chuyện hài hước như một người bạn thân thực sự!",
+                aboutP2: "Không còn những dòng chữ khô khan, hãy bước vào kỷ nguyên giao tiếp AI trực quan với trải nghiệm như một cuộc gọi video đích thực.",
                 featTitle: "Tính Năng Vượt Trội",
                 f1Title: "Giao Tiếp Rảnh Tay",
                 f1Desc: "Trò chuyện liên tục như một cuộc gọi video thực sự. Nhận diện giọng nói STT siêu tốc, tự phản hồi khi bạn dừng lời.",
@@ -325,17 +477,30 @@
                 f5Title: "Phân Tích Tài Liệu",
                 f5Desc: "Nhập trực tiếp file Word, Excel. AI sẽ đọc, tóm tắt và cùng bạn thảo luận số liệu ngay trong lúc trò chuyện.",
                 f6Title: "Bảo Mật Quyền Riêng Tư",
-                f6Desc: "Nhật ký hội thoại được mã hóa bằng mật khẩu. Dữ liệu của bạn thuộc về bạn, đảm bảo an toàn tuyệt đối.",
-                footer: "&copy; 2026 AI E VI. Thiết kế và phát triển bởi Đội ngũ kỹ thuật. Tất cả quyền được bảo lưu."
+                f6Desc: "Nhật ký hội thoại được mã hóa bằng mật khẩu. Xem chi tiết cách ứng dụng thu thập và xử lý dữ liệu trong <a href='" + PRIVACY_URL + "' target='_blank' rel='noopener'>Chính sách quyền riêng tư</a>.",
+                contactTitle: "Liên Hệ Nhà Phát Triển",
+                cDev: "Nhà phát triển",
+                cAddr: "Địa chỉ",
+                cAddrVal: "Vĩnh Long, Việt Nam",
+                cPhone: "Điện thoại",
+                cPrivacy: "Chính sách quyền riêng tư",
+                cPrivacyLink: "Xem chính sách",
+                footer: "&copy; 2026 AI E VI. Phát triển bởi Lê Thành Công. Tất cả quyền được bảo lưu.",
+                footerPrivacy: "Chính sách quyền riêng tư"
             },
             en: {
                 title: "AI E VI - Smart Virtual Assistant",
                 navHome: "Home",
+                navAbout: "About",
                 navFeatures: "Features",
                 navContact: "Contact",
+                navPrivacy: "Privacy",
                 heroTitle: "Lifelike AI Assistant <br><span>Like a Friend</span>",
                 heroDesc: "Experience intuitive AI communication with AI E VI. Not just text, the app provides a dynamic face, realistic expressions, and top-tier processing via camera and voice.",
                 heroBtn: "<i class='fab fa-google-play'></i> Download on Google Play",
+                aboutTitle: "About AI E VI",
+                aboutP1: "Looking for a close friend or a capable assistant you can talk to anytime, anywhere? AI E VI brings a completely new experience: a smart AI that doesn't just chat in text, but has a lively face, shows emotions, and jokes around like a real best friend!",
+                aboutP2: "No more dry lines of text. Step into the era of visual AI communication with an experience that feels like a real video call.",
                 featTitle: "Outstanding Features",
                 f1Title: "Hands-free Communication",
                 f1Desc: "Continuous conversation like a real video call. High-speed STT voice recognition, auto-responds when you stop speaking.",
@@ -348,8 +513,16 @@
                 f5Title: "Document Analysis",
                 f5Desc: "Import Word, Excel files directly. AI will read, summarize, and discuss data with you during the chat.",
                 f6Title: "Privacy & Security",
-                f6Desc: "Chat logs are password-encrypted. Your data belongs to you, ensuring absolute safety.",
-                footer: "&copy; 2026 AI E VI. Designed and developed by the Technical Team. All rights reserved."
+                f6Desc: "Chat logs are password-encrypted. See how the app collects and handles data in our <a href='" + PRIVACY_URL + "' target='_blank' rel='noopener'>Privacy Policy</a>.",
+                contactTitle: "Contact the Developer",
+                cDev: "Developer",
+                cAddr: "Address",
+                cAddrVal: "Vinh Long, Vietnam",
+                cPhone: "Phone",
+                cPrivacy: "Privacy Policy",
+                cPrivacyLink: "Read the policy",
+                footer: "&copy; 2026 AI E VI. Developed by Le Thanh Cong. All rights reserved.",
+                footerPrivacy: "Privacy Policy"
             }
         };
 
