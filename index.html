@@ -83,7 +83,7 @@
             display: inline-flex;
             gap: 5px;
         }
-        
+
         .lang-toggle button {
             background: transparent;
             color: var(--text-muted);
@@ -95,7 +95,7 @@
             font-weight: bold;
             font-size: 0.9rem;
         }
-        
+
         .lang-toggle button.active, .lang-toggle button:hover {
             color: var(--text-main);
             border-color: var(--secondary);
@@ -172,7 +172,7 @@
             100% { transform: translateY(0); }
         }
 
-        /* About Section (MỚI) */
+        /* About Section */
         .about {
             padding: 80px 10%;
             text-align: center;
@@ -249,11 +249,65 @@
             color: var(--secondary);
         }
 
-        /* Contact Section (MỚI) */
-        .contact {
+        /* Tutorial Section (MỚI) */
+        .tutorial {
             padding: 80px 10%;
             text-align: center;
             background-color: var(--bg-alt);
+        }
+
+        .tutorial h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+
+        .video-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .video-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 15px;
+            width: 100%;
+        }
+
+        .video-card.wide  { max-width: 640px; flex: 1 1 480px; }
+        .video-card.short { max-width: 340px; flex: 0 1 340px; }
+
+        .video-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .video-frame {
+            position: relative;
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-frame.ratio-16-9 { aspect-ratio: 16 / 9; }
+        .video-frame.ratio-9-16 { aspect-ratio: 9 / 16; }
+
+        .video-frame iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 10%;
+            text-align: center;
+            background-color: var(--bg-color);
         }
 
         .contact h2 {
@@ -340,7 +394,7 @@
             .hero h1 { font-size: 2.5rem; }
             .hero-image { margin-top: 50px; }
             .nav-links { display: none; }
-            .about h2, .features h2, .contact h2 { font-size: 2rem; }
+            .about h2, .features h2, .tutorial h2, .contact h2 { font-size: 2rem; }
         }
     </style>
 </head>
@@ -352,6 +406,7 @@
             <a href="#home" data-key="navHome">Trang chủ</a>
             <a href="#about" data-key="navAbout">Giới thiệu</a>
             <a href="#features" data-key="navFeatures">Tính năng</a>
+            <a href="#tutorial" data-key="navTutorial">Hướng dẫn</a>
             <a href="#contact" data-key="navContact">Liên hệ</a>
             <a href="https://sites.google.com/view/ai-thanh-tien/trang-ch%E1%BB%A7" target="_blank" rel="noopener" data-key="navPrivacy">Quyền riêng tư</a>
             <div class="lang-toggle">
@@ -372,7 +427,6 @@
         </div>
     </section>
 
-    <!-- MỚI: Phần giới thiệu -->
     <section id="about" class="about">
         <h2 data-key="aboutTitle">Giới Thiệu AI E VI</h2>
         <p data-key="aboutP1">Bạn đang tìm kiếm một người bạn tâm giao hay một trợ thủ đắc lực có thể trò chuyện trực tiếp mọi lúc mọi nơi? AI E VI mang đến một trải nghiệm hoàn toàn mới: một AI thông minh không chỉ biết chat bằng văn bản mà còn có khuôn mặt sinh động, biết biểu lộ cảm xúc và trò chuyện hài hước như một người bạn thân thực sự!</p>
@@ -415,7 +469,25 @@
         </div>
     </section>
 
-    <!-- MỚI: Thông tin liên hệ (lấy từ trang Máy Phơi) -->
+    <!-- MỚI: Video hướng dẫn cài đặt -->
+    <section id="tutorial" class="tutorial">
+        <h2 data-key="tutTitle">Video Hướng Dẫn Cài Đặt</h2>
+        <div class="video-grid">
+            <div class="video-card short">
+                <h3 data-key="tutV1">Hướng dẫn nhanh (Shorts)</h3>
+                <div class="video-frame ratio-9-16">
+                    <iframe src="https://www.youtube-nocookie.com/embed/_hNP_UJ_7hU" title="Hướng dẫn cài đặt AI E VI - Shorts" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="video-card wide">
+                <h3 data-key="tutV2">Hướng dẫn chi tiết</h3>
+                <div class="video-frame ratio-16-9">
+                    <iframe src="https://www.youtube-nocookie.com/embed/nFkphTmQfuk" title="Hướng dẫn cài đặt AI E VI - Chi tiết" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="contact" class="contact">
         <h2 data-key="contactTitle">Liên Hệ Nhà Phát Triển</h2>
         <div class="contact-grid">
@@ -430,9 +502,9 @@
                 <div class="value" data-key="cAddrVal">số 484, tổ 33, ấp Phú Hữu Đông, xã Song Phú, tỉnh Vĩnh Long, Việt Nam</div>
             </div>
             <div class="contact-item">
-                <i class="fas fa-phone"></i>
-                <div class="label" data-key="cPhone">email liên hệ </div>
-                <div class="value"><a href="tel:thanhcong6@gmail.com">thanhcong6@gmail.com</a></div>
+                <i class="fas fa-envelope"></i>
+                <div class="label" data-key="cPhone">Email liên hệ</div>
+                <div class="value"><a href="mailto:thanhcong6@gmail.com">thanhcong6@gmail.com</a></div>
             </div>
             <div class="contact-item">
                 <i class="fas fa-shield-alt"></i>
@@ -457,6 +529,7 @@
                 navHome: "Trang chủ",
                 navAbout: "Giới thiệu",
                 navFeatures: "Tính năng",
+                navTutorial: "Hướng dẫn",
                 navContact: "Liên hệ",
                 navPrivacy: "Quyền riêng tư",
                 heroTitle: "Trợ Lý AI Sống Động <br><span>Như Một Người Bạn</span>",
@@ -478,11 +551,14 @@
                 f5Desc: "Nhập trực tiếp file Word, Excel. AI sẽ đọc, tóm tắt và cùng bạn thảo luận số liệu ngay trong lúc trò chuyện.",
                 f6Title: "Bảo Mật Quyền Riêng Tư",
                 f6Desc: "Nhật ký hội thoại được mã hóa bằng mật khẩu. Xem chi tiết cách ứng dụng thu thập và xử lý dữ liệu trong <a href='" + PRIVACY_URL + "' target='_blank' rel='noopener'>Chính sách quyền riêng tư</a>.",
+                tutTitle: "Video Hướng Dẫn Cài Đặt",
+                tutV1: "Hướng dẫn nhanh (Shorts)",
+                tutV2: "Hướng dẫn chi tiết",
                 contactTitle: "Liên Hệ Nhà Phát Triển",
                 cDev: "Nhà phát triển",
                 cAddr: "Địa chỉ",
-                cAddrVal: "Vĩnh Long, Việt Nam",
-                cPhone: "Điện thoại",
+                cAddrVal: "số 484, tổ 33, ấp Phú Hữu Đông, xã Song Phú, tỉnh Vĩnh Long, Việt Nam",
+                cPhone: "Email liên hệ",
                 cPrivacy: "Chính sách quyền riêng tư",
                 cPrivacyLink: "Xem chính sách",
                 footer: "&copy; 2026 AI E VI. Phát triển bởi Lê Thành Công. Tất cả quyền được bảo lưu.",
@@ -493,6 +569,7 @@
                 navHome: "Home",
                 navAbout: "About",
                 navFeatures: "Features",
+                navTutorial: "Guide",
                 navContact: "Contact",
                 navPrivacy: "Privacy",
                 heroTitle: "Lifelike AI Assistant <br><span>Like a Friend</span>",
@@ -514,11 +591,14 @@
                 f5Desc: "Import Word, Excel files directly. AI will read, summarize, and discuss data with you during the chat.",
                 f6Title: "Privacy & Security",
                 f6Desc: "Chat logs are password-encrypted. See how the app collects and handles data in our <a href='" + PRIVACY_URL + "' target='_blank' rel='noopener'>Privacy Policy</a>.",
+                tutTitle: "Installation Guide Videos",
+                tutV1: "Quick guide (Shorts)",
+                tutV2: "Detailed guide",
                 contactTitle: "Contact the Developer",
                 cDev: "Developer",
                 cAddr: "Address",
-                cAddrVal: "Vinh Long, Vietnam",
-                cPhone: "Phone",
+                cAddrVal: "No. 484, Group 33, Phu Huu Dong Hamlet, Song Phu Commune, Vinh Long Province, Vietnam",
+                cPhone: "Contact email",
                 cPrivacy: "Privacy Policy",
                 cPrivacyLink: "Read the policy",
                 footer: "&copy; 2026 AI E VI. Developed by Le Thanh Cong. All rights reserved.",
