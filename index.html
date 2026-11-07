@@ -294,6 +294,8 @@
 
         .video-frame.ratio-16-9 { aspect-ratio: 16 / 9; }
         .video-frame.ratio-9-16 { aspect-ratio: 9 / 16; }
+        .video-frame.ratio-tiktok { aspect-ratio: 325 / 740; background: #fff; }
+        .video-card.tiktok { max-width: 340px; flex: 0 1 340px; }
 
         .video-frame iframe {
             position: absolute;
@@ -500,6 +502,12 @@
                     <iframe src="https://www.youtube-nocookie.com/embed/nFkphTmQfuk" title="Hướng dẫn cài đặt AI E VI - Chi tiết" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
+            <div class="video-card tiktok">
+                <h3 data-key="tutV3">Video trên TikTok</h3>
+                <div class="video-frame ratio-tiktok">
+                    <iframe src="https://www.tiktok.com/embed/v2/7685750109908356373" title="AI E VI trên TikTok" loading="lazy" allow="encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -575,6 +583,7 @@
                 tutTitle: "Video Hướng Dẫn Cài Đặt",
                 tutV1: "Hướng dẫn nhanh (Shorts)",
                 tutV2: "Hướng dẫn chi tiết",
+                tutV3: "Video trên TikTok",
                 contactTitle: "Liên Hệ Nhà Phát Triển",
                 cDev: "Nhà phát triển",
                 cAddr: "Địa chỉ",
@@ -621,6 +630,7 @@
                 tutTitle: "Installation Guide Videos",
                 tutV1: "Quick guide (Shorts)",
                 tutV2: "Detailed guide",
+                tutV3: "Video on TikTok",
                 contactTitle: "Contact the Developer",
                 cDev: "Developer",
                 cAddr: "Address",
